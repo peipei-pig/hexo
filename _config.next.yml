@@ -1,0 +1,5 @@
+custom_file_path:
+  postMeta: source/_data/post-meta.njk
+  bodyEnd: source/_data/post-body-end.njk
+  header: source/_data/header.njk
+  style: source/_data/styles.styl

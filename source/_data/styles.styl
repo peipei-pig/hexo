@@ -1,0 +1,49 @@
+.category-all-title {
+  display: none !important;
+}
+
+.tag-cloud-title {
+  display: none !important;
+}
+
+.collection-header {
+  display: none !important;
+}
+
+/* 文章卡片更有层次（首页 & 列表） */
+.post-block
+  border-radius: 14px
+  box-shadow: 0 6px 22px rgba(0,0,0,.06)
+  padding: 1.2rem 1.4rem
+
+/* 标题悬停更明显，但不浮夸 */
+.post-title-link:hover
+  text-decoration: none
+  opacity: .85
+  filter: saturate(1.1)
+
+/* 正文更宽一点（Muse/Mist 单栏下） */
+.main-inner
+  max-width: 880px
+
+/* 页脚统计行更克制 */
+.site-meta-counts .post-meta-item-text
+  margin: 0 .25rem
+  opacity: .8
+
+/* —— 仅隐藏导航里的放大镜图标，保留“Search”文字 —— */
+.menu-item-search i,
+.menu-item-search .menu-item-icon,
+.menu-item-search .fa,
+.menu-item-search [class*="fa-"],
+.menu-item-search svg,
+.menu-item-search a::before
+  display: none !important
+
+/* 去掉为图标预留的间距，让“Search”贴左 */
+.menu-item-search .menu-item-label
+  margin-left: 0 !important
+
+/* Mist / Muse 下常见：icon 会占固定宽度，强制归零 */
+.site-nav .menu-item-search .menu-item-icon
+  width: 0 !important
