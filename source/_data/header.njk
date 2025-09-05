@@ -1,8 +1,14 @@
 {# source/_data/header.njk #}
-<div class="site-meta-counts" style="font-size:.9em;opacity:.85;margin-top:.25rem">
+<div class="site-meta-counts" style="font-size:.9em;opacity:.85;margin-top:.25rem;display:flex;gap:.75rem;flex-wrap:wrap">
   <span class="post-meta-item">
     <i class="fa fa-eye"></i>
     <span class="post-meta-item-text">总访问量</span>
     <span id="vercount_value_site_pv">0</span>
+  </span>
+
+  <span class="post-meta-item">
+    <i class="fa fa-file"></i>
+    <span class="post-meta-item-text">总文章数</span>
+    <span id="total_posts_count">{{ site.posts.length }}</span>
   </span>
 </div>

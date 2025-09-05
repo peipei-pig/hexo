@@ -1,49 +1,58 @@
-.category-all-title {
-  display: none !important;
-}
+/* —— 分类/标签页标题精简 —— */
+.category-all-title, .tag-cloud-title, .collection-header
+  display: none !important
 
-.tag-cloud-title {
-  display: none !important;
-}
+/* —— 列表页文章块更紧凑 —— */
+.index.posts-expand
+  /* 兼容不同版本/布局下的文章容器类名 */
+  article.post-block, article.post
+    margin: 0 0 10px !important
+    padding-bottom: 6px !important
 
-.collection-header {
-  display: none !important;
-}
+  /* 标题/元信息/摘要行距压缩 */
+  .post-header
+    margin-bottom: 4px !important
 
-/* 文章卡片更有层次（首页 & 列表） */
+  .post-title
+    margin: 0 !important
+    line-height: 1.35
+
+  .post-meta
+    margin: 0 0 4px !important
+
+  .post-body
+    margin: 0 !important
+    p
+      margin: 0 !important
+
+  /* 去掉列表项之间的分隔符，避免额外留白 */
+  .post-eof
+    display: none !important
+
+  /* 若主题输出了 <hr> 作为分隔，压缩其上下边距 */
+  hr
+    margin: 6px 0 !important
+
+  /* “Read more” 的顶边距也缩小一点 */
+  .post-button
+    margin-top: 6px !important
+
+/* —— 文章卡片观感（可选） —— */
 .post-block
   border-radius: 14px
   box-shadow: 0 6px 22px rgba(0,0,0,.06)
   padding: 1.2rem 1.4rem
 
-/* 标题悬停更明显，但不浮夸 */
-.post-title-link:hover
-  text-decoration: none
-  opacity: .85
-  filter: saturate(1.1)
-
-/* 正文更宽一点（Muse/Mist 单栏下） */
-.main-inner
-  max-width: 880px
-
-/* 页脚统计行更克制 */
-.site-meta-counts .post-meta-item-text
-  margin: 0 .25rem
-  opacity: .8
-
-/* —— 仅隐藏导航里的放大镜图标，保留“Search”文字 —— */
+/* —— 导航里只留“Search”文字 —— */
 .menu-item-search i,
 .menu-item-search .menu-item-icon,
-.menu-item-search .fa,
-.menu-item-search [class*="fa-"],
+.menu-item-search [class*='fa-'],
 .menu-item-search svg,
 .menu-item-search a::before
   display: none !important
-
-/* 去掉为图标预留的间距，让“Search”贴左 */
 .menu-item-search .menu-item-label
   margin-left: 0 !important
 
-/* Mist / Muse 下常见：icon 会占固定宽度，强制归零 */
-.site-nav .menu-item-search .menu-item-icon
-  width: 0 !important
+/* —— 正文容器略放宽（Mist/Muse 单栏）—— */
+.main-inner
+  max-width: 880px
