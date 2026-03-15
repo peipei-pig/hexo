@@ -17,3 +17,8 @@ post_meta:
 
 local_search:
   enable: true
+
+sidebar:
+  position: right
+  display: always
+  onmobile: false
