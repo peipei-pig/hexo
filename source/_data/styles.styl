@@ -182,6 +182,14 @@
 .sidebar .site-state-item-count
   color: rgba(0, 0, 0, .72) !important
 
+/* Keep only TOC in sidebar, remove overview content */
+.sidebar-nav-overview,
+.site-overview-wrap
+  display: none !important
+
+.sidebar-nav .sidebar-nav-toc
+  width: 100% !important
+
 @media (max-width: 767px)
   .main-menu
     flex-wrap: wrap
