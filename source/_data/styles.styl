@@ -57,6 +57,62 @@
   font-size: 1.1rem
   font-weight: 600
 
+.home-layout
+  display: grid
+  grid-template-columns: minmax(0, 1fr) 280px
+  gap: 1.2rem
+  align-items: start
+
+.home-main
+  min-width: 0
+
+.home-about
+  position: sticky
+  top: 84px
+  border: 1px solid rgba(0, 0, 0, .1)
+  border-radius: 12px
+  background: #fafafa
+  padding: 1rem
+
+.home-about-avatar
+  display: inline-block
+  margin-bottom: .5rem
+
+.home-about-avatar img
+  width: 84px
+  height: 84px
+  border-radius: 8px
+  object-fit: cover
+
+.home-about-title
+  margin: 0 0 .4rem
+  font-size: 1rem
+  font-weight: 600
+
+.home-about-desc
+  margin: 0 0 .8rem
+  color: rgba(0, 0, 0, .64)
+  line-height: 1.5
+
+.home-about-stats
+  list-style: none
+  margin: 0
+  padding: 0
+  display: grid
+  gap: .45rem
+
+.home-about-stats li
+  display: flex
+  justify-content: space-between
+  align-items: center
+  font-size: .92rem
+
+.home-about-stats .label
+  color: rgba(0, 0, 0, .65)
+
+.home-about-stats .value
+  font-weight: 600
+
 /* Index post card: title + one-line summary + reading time + tags */
 .index.posts-expand .post-meta
   margin: .3rem 0 .35rem !important
@@ -112,8 +168,26 @@
 .index.posts-expand .post-eof
   display: none !important
 
+/* Sidebar tone down: avoid heavy dark block */
+.sidebar
+  background: #f7f7f7 !important
+
+.sidebar-inner
+  background: #f7f7f7 !important
+
+.sidebar a,
+.sidebar .site-author-name,
+.sidebar .site-description,
+.sidebar .site-state-item-name,
+.sidebar .site-state-item-count
+  color: rgba(0, 0, 0, .72) !important
+
 @media (max-width: 767px)
   .main-menu
     flex-wrap: wrap
   .site-meta-counts
     flex-wrap: wrap
+  .home-layout
+    grid-template-columns: 1fr
+  .home-about
+    position: static

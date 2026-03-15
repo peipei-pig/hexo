@@ -19,6 +19,6 @@ local_search:
   enable: true
 
 sidebar:
-  position: right
-  display: always
+  position: left
+  display: post
   onmobile: false
