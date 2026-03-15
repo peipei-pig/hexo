@@ -1,58 +1,115 @@
-/* —— 分类/标签页标题精简 —— */
-.category-all-title, .tag-cloud-title, .collection-header
-  display: none !important
-
-/* —— 列表页文章块更紧凑 —— */
-.index.posts-expand
-  /* 兼容不同版本/布局下的文章容器类名 */
-  article.post-block, article.post
-    margin: 0 0 10px !important
-    padding-bottom: 6px !important
-
-  /* 标题/元信息/摘要行距压缩 */
-  .post-header
-    margin-bottom: 4px !important
-
-  .post-title
-    margin: 0 !important
-    line-height: 1.35
-
-  .post-meta
-    margin: 0 0 4px !important
-
-  .post-body
-    margin: 0 !important
-    p
-      margin: 0 !important
-
-  /* 去掉列表项之间的分隔符，避免额外留白 */
-  .post-eof
-    display: none !important
-
-  /* 若主题输出了 <hr> 作为分隔，压缩其上下边距 */
-  hr
-    margin: 6px 0 !important
-
-  /* “Read more” 的顶边距也缩小一点 */
-  .post-button
-    margin-top: 6px !important
-
-/* —— 文章卡片观感（可选） —— */
-.post-block
-  border-radius: 14px
-  box-shadow: 0 6px 22px rgba(0,0,0,.06)
-  padding: 1.2rem 1.4rem
-
-/* —— 导航里只留“Search”文字 —— */
-.menu-item-search i,
-.menu-item-search .menu-item-icon,
-.menu-item-search [class*='fa-'],
-.menu-item-search svg,
-.menu-item-search a::before
-  display: none !important
-.menu-item-search .menu-item-label
-  margin-left: 0 !important
-
-/* —— 正文容器略放宽（Mist/Muse 单栏）—— */
+/* Layout tweaks */
 .main-inner
-  max-width: 880px
+  max-width: 960px
+
+/* Search as icon-only button aligned to the right */
+.main-menu
+  display: flex
+  flex-wrap: wrap
+  gap: .2rem
+  align-items: center
+
+.menu-item-search
+  margin-left: auto
+
+.menu-item-search .popup-trigger
+  font-size: 0
+  line-height: 1
+  padding: .45rem .55rem
+  border-radius: 999px
+  border: 1px solid rgba(0, 0, 0, .12)
+
+.menu-item-search .popup-trigger i
+  font-size: 14px
+
+/* Homepage blocks */
+.home-block
+  margin: 0 0 1.25rem
+
+.home-block-title
+  margin: 0 0 .8rem
+  font-size: 1.1rem
+  font-weight: 600
+
+.topic-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))
+  gap: .7rem
+  margin-bottom: 1rem
+
+.topic-card
+  display: block
+  padding: .7rem .8rem
+  border-radius: 10px
+  border: 1px solid rgba(0, 0, 0, .1)
+  text-decoration: none
+  transition: all .2s ease
+
+.topic-card:hover
+  transform: translateY(-1px)
+  border-color: rgba(0, 0, 0, .25)
+
+.topic-card-title
+  display: block
+  font-weight: 600
+  margin-bottom: .25rem
+
+.topic-card-desc
+  display: block
+  font-size: .86rem
+  opacity: .75
+
+/* Index post card: title + one-line summary + reading time + tags */
+.index.posts-expand .post-meta
+  margin: .3rem 0 .35rem !important
+  display: flex
+  flex-wrap: wrap
+  gap: .5rem
+  align-items: center
+
+.index.posts-expand .post-meta-item
+  margin: 0 !important
+
+.index.posts-expand .post-body
+  margin: 0 !important
+
+.index.posts-expand .post-body > *
+  display: none !important
+
+.index.posts-expand .post-body > *:first-child
+  display: block !important
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  margin: 0 !important
+  color: rgba(0, 0, 0, .68)
+
+.index.posts-expand .post-button
+  display: none !important
+
+.index.posts-expand .post-description
+  display: none !important
+
+.post-meta-tags-lite
+  display: inline-flex
+  align-items: center
+  gap: .35rem
+
+.post-tag-link-lite
+  display: inline-block
+  padding: .05rem .45rem
+  border-radius: 999px
+  border: 1px solid rgba(0, 0, 0, .14)
+  font-size: .78rem
+  line-height: 1.5
+  text-decoration: none
+
+/* Keep the list compact */
+.index.posts-expand article.post-block
+  margin: 0 0 .85rem !important
+  padding: 1rem 1.2rem
+  border-radius: 12px
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .05)
+
+.index.posts-expand .post-eof
+  display: none !important

@@ -1,5 +1,19 @@
-﻿custom_file_path:
+custom_file_path:
   postMeta: source/_data/post-meta.njk
   bodyEnd: source/_data/post-body-end.njk
   header: source/_data/header.njk
   style: source/_data/styles.styl
+
+excerpt_description: true
+read_more_btn: false
+
+post_meta:
+  item_text: false
+  created_at: false
+  updated_at:
+    enable: false
+    another_day: false
+  categories: false
+
+local_search:
+  enable: true
