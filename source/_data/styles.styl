@@ -5,22 +5,48 @@
 /* Search as icon-only button aligned to the right */
 .main-menu
   display: flex
-  flex-wrap: wrap
-  gap: .2rem
+  flex-wrap: nowrap
+  gap: .12rem
   align-items: center
 
 .menu-item-search
-  margin-left: auto
+  margin-left: .1rem
+  flex: 0 0 auto
 
 .menu-item-search .popup-trigger
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  width: 32px
+  height: 32px
   font-size: 0
   line-height: 1
-  padding: .45rem .55rem
+  padding: 0
   border-radius: 999px
   border: 1px solid rgba(0, 0, 0, .12)
+  color: transparent
+  white-space: nowrap
 
 .menu-item-search .popup-trigger i
   font-size: 14px
+  color: rgba(0, 0, 0, .68)
+
+.site-meta-counts
+  font-size: .9em
+  opacity: .85
+  margin-top: .25rem
+  display: flex
+  gap: .6rem
+  align-items: center
+  flex-wrap: nowrap
+  white-space: nowrap
+
+.site-meta-counts .post-meta-item
+  display: inline-flex
+  align-items: center
+  gap: .2rem
+  margin: 0
+  white-space: nowrap
 
 /* Homepage blocks */
 .home-block
@@ -113,3 +139,9 @@
 
 .index.posts-expand .post-eof
   display: none !important
+
+@media (max-width: 767px)
+  .main-menu
+    flex-wrap: wrap
+  .site-meta-counts
+    flex-wrap: wrap
