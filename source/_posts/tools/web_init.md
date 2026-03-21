@@ -1,5 +1,6 @@
 ﻿---
 title: ubuntu搭建技术博客指南
+date: 2025-08-24 16:28:39
 categories:
   - 工具
 description: web网页搭建实战记录

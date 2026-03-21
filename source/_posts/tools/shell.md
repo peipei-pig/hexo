@@ -1,5 +1,6 @@
 ﻿---
 title: "ubuntu常见shell命令"
+date: 2025-08-24 16:28:39
 mathjax: true
 categories:
   - 工具

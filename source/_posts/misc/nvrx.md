@@ -1,5 +1,6 @@
 ﻿---
 title: "NVIDIA Resiliency Extension (NVRx) 简介"
+date: 2026-03-15 11:04:34
 mathjax: true
 categories:
   - 杂项

@@ -1,5 +1,6 @@
 ﻿---
 title: "AMPeD: An Analytical Model for Performance in Distributed Training of Transformers" 
+date: 2026-03-15 11:04:34
 mathjax: true
 categories:
   - 训练

@@ -1,5 +1,6 @@
 ﻿---
 title: "Reducing Activation Recomputation in Large Transformer Models" 
+date: 2025-12-28 11:13:49
 mathjax: true
 categories:
   - 训练

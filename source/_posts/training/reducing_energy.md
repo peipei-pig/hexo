@@ -1,5 +1,6 @@
 ﻿---
 title: "Reducing Energy Bloat in Large Model Training" 
+date: 2026-03-15 11:04:34
 mathjax: true
 categories:
   - 训练

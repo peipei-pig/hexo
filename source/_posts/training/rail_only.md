@@ -1,5 +1,6 @@
 ﻿---
 title: "Rail-only: A Low-Cost High-Performance Network for Training LLMs with Trillion Parameters" 
+date: 2026-03-15 11:04:34
 mathjax: true
 categories:
   - 训练

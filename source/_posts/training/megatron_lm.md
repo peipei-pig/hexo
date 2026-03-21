@@ -1,5 +1,6 @@
 ﻿---
 title: "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism" 
+date: 2025-12-28 11:13:49
 mathjax: true
 categories:
   - 训练

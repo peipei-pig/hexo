@@ -1,5 +1,6 @@
 ﻿---
 title: "lumos:Efficient Performance Modeling and Estimation for Large-scale LLM Training" 
+date: 2025-08-24 16:28:39
 mathjax: true
 categories:
   - 训练

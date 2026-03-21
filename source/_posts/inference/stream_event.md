@@ -1,5 +1,6 @@
 ﻿---
 title: pytorch中的stream和event
+date: 2025-09-05 08:32:03
 mathjax: true
 categories:
   - 推理
