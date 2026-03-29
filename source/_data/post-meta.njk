@@ -18,6 +18,13 @@
 {% endif %}
 
 {% if page.layout == 'post' %}
+  {% set page_plain_text = page.content | striptags %}
+  <span class="post-meta-item post-meta-reading" data-reading-symbols="{{ page_plain_text | length }}">
+    <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+    <span class="post-meta-item-text">阅读时间</span>
+    <span class="post-reading-time-value">1 分钟</span>
+  </span>
+
   <span class="post-meta-item">
     <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
     <span class="post-meta-item-text">Views:</span>
