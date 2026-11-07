@@ -1,0 +1,27 @@
+(function () {
+  'use strict';
+  var mount = document.getElementById('hexo-html-article');
+  if (!mount) return;
+  var root = mount.dataset.root || '/';
+  var main = document.querySelector('main') || document.body;
+  var minutes = Math.max(1, Math.ceil((main.innerText || main.textContent || '').length / 500));
+  var bar = document.createElement('div');
+  bar.className = 'hexo-html-bar';
+  var home = document.createElement('a');
+  home.href = mount.dataset.home || '/';
+  home.textContent = '← 返回博客';
+  var info = document.createElement('span');
+  info.className = 'hexo-html-meta';
+  info.appendChild(document.createTextNode('阅读约 ' + minutes + ' 分钟 · 浏览量 '));
+  var views = document.createElement('span');
+  views.id = 'vercount_value_page_pv';
+  views.textContent = '—';
+  info.appendChild(views);
+  bar.appendChild(home);
+  bar.appendChild(info);
+  mount.appendChild(bar);
+  var counter = document.createElement('script');
+  counter.src = 'https://events.vercount.one/js';
+  counter.defer = true;
+  document.head.appendChild(counter);
+}());

@@ -1,0 +1,5 @@
+#hexo-html-article .hexo-html-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px max(24px,calc((100vw - 972px)/2));background:#0e2e39;color:#d4e6e5;font:14px/1.5 "Microsoft YaHei","PingFang SC",sans-serif}
+#hexo-html-article .hexo-html-bar a{color:#d4e6e5;text-decoration:none}
+#hexo-html-article .hexo-html-bar a:hover{text-decoration:underline}
+#hexo-html-article .hexo-html-meta{white-space:nowrap}
+@media(max-width:600px){#hexo-html-article .hexo-html-bar{padding:10px 18px}}

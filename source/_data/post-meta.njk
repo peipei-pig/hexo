@@ -1,7 +1,7 @@
 {# source/_data/post-meta.njk #}
 {% if is_index and post %}
   {% set plain_text = post.content | striptags %}
-  <span class="post-meta-item post-meta-reading" data-reading-symbols="{{ plain_text | length }}">
+  <span class="post-meta-item post-meta-reading" data-reading-symbols="{{ html_article_symbols(post) or (plain_text | length) }}">
     <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
     <span class="post-meta-item-text">阅读约</span>
     <span class="post-reading-time-value">1 分钟</span>
