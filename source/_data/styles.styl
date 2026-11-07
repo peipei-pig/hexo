@@ -199,3 +199,7 @@
     grid-template-columns: 1fr
   .home-about
     position: static
+
+/* HTML articles are internal pages, even though NexT treats them as link posts. */
+.post-title-link-external[href^="/papers/"] .fa-external-link-alt
+  display: none
