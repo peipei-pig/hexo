@@ -276,7 +276,7 @@ article section{margin:0 0 90px}article h2{font-family:var(--serif);font-size:34
 </style></head>
 <body>
 <div class="progress" id="progress"></div>
-<header class="top"><div class="topright"><button aria-label="切换深色和浅色主题" class="btn" id="themeToggle">◐ 主题</button><button aria-label="打印本文" class="btn" id="printBtn">打印 / PDF</button></div></header>
+
 <div class="hero"><div class="hero-inner"><h1>Megatron Core 0.8—0.20：<br/><em>五次转折，读懂训练引擎的演进</em></h1></div></div>
 <div class="shell">
 <nav aria-label="文章目录" class="sidebar"><div class="cap">CONTENTS / 目录</div>
@@ -460,10 +460,7 @@ article section{margin:0 0 90px}article h2{font-family:var(--serif);font-size:34
 </div>
 <script>
 (function(){
- const root=document.documentElement, progress=document.getElementById('progress'),toggle=document.getElementById('themeToggle');
- try{const t=localStorage.getItem('mcore-theme');if(t==='dark'||t==='light')root.setAttribute('data-theme',t);}catch(e){}
- toggle.addEventListener('click',()=>{const t=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',t);try{localStorage.setItem('mcore-theme',t)}catch(e){}});
- document.getElementById('printBtn').addEventListener('click',()=>window.print());
+ const progress=document.getElementById('progress');
  const update=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?Math.min(100,Math.max(0,window.scrollY/max*100)):0)+'%'};
  window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
  const links=[...document.querySelectorAll('.sidebar a[href^="#"]')], sections=[...document.querySelectorAll('article section[id]')];
