@@ -524,7 +524,7 @@ main{padding-top:2.35rem}
 <div class="equation trace-arithmetic">0.65872 × 0.00767 + 0.11954 × (−0.02547) + 0.22174 × 0.00042 ≈ <strong>0.00210</strong></div>
 <p>Q 头 2 读取同一组 K/V，而它的权重约为 <code>[4.78e−7, 0.00069, 0.99931]</code>。14 个头各产生一个 64 维向量，拼成 <code>14 × 64 = 896</code> 维，经 <code>o_proj</code> 给出 <code>[1,1,896]</code> 的注意力子层输出。该分布只描述这个层和头在当前位置的取值。</p><p class="basics-small">注意：65.872% 只表示这个固定模型、这一层、这一个 Q 头、这一次输入的注意力权重；不能将其直接当作对应词语对最终预测的“重要性”。</p>
 <details class="deeper"><summary>投影形状与第一层数值记录</summary>
-<p class="basics-small">本步只有一个输入 Token。Q、K、V 投影共用 RMSNorm 的输出 <code>[1, 1, 896]</code>。线性层输入和输出的轴顺序是 <code>[batch, tokens, features]</code>，权重按 <code>[out_features, in_features]</code> 排列。</p>
+<p class="basics-small">本步只有一个输入 Token。Q、K、V 各执行一次线性投影，生成各自所有头的数据，三者共用 RMSNorm 的输出 <code>[1, 1, 896]</code>。线性层输入和输出的轴顺序是 <code>[batch, tokens, features]</code>，权重按 <code>[out_features, in_features]</code> 排列。</p>
 <div aria-label="第 1 层投影与注意力的张量形状" class="table-region trace-table projection-shapes" role="region" tabindex="0">
 <table>
 <caption>第 1 层 Decode 的投影与注意力计算</caption>
@@ -533,11 +533,13 @@ main{padding-top:2.35rem}
 <tr><th scope="row"><code>q_proj</code></th><td><code>[1, 1, 896]</code></td><td><code>[896, 896]</code></td><td><code>[1, 1, 896]</code></td><td>投影后拆头<br><code>[1, 1, 14, 64]</code> → <code>[1, 14, 1, 64]</code></td></tr>
 <tr><th scope="row"><code>k_proj</code></th><td><code>[1, 1, 896]</code></td><td><code>[128, 896]</code></td><td><code>[1, 1, 128]</code></td><td>投影后拆头<br><code>[1, 1, 2, 64]</code> → <code>[1, 2, 1, 64]</code></td></tr>
 <tr><th scope="row"><code>v_proj</code></th><td><code>[1, 1, 896]</code></td><td><code>[128, 896]</code></td><td><code>[1, 1, 128]</code></td><td>投影后拆头<br><code>[1, 1, 2, 64]</code> → <code>[1, 2, 1, 64]</code></td></tr>
-<tr><th scope="row">注意力</th><td>Q <code>[1, 14, 1, 64]</code><br>K、V 各 <code>[1, 14, 3, 64]</code></td><td>—</td><td>Z <code>[1, 14, 1, 64]</code></td><td>缩放打分 <code>S = QKᵀ / √64</code><br>沿 3 个可见位置归一化 <code>A = softmax(S)</code><br>S、A 各为 <code>[1, 14, 1, 3]</code><br>加权求和 <code>Z = AV</code></td></tr>
-<tr><th scope="row"><code>o_proj</code></th><td><code>[1, 1, 896]</code></td><td><code>[896, 896]</code></td><td><code>[1, 1, 896]</code></td><td>投影前合头<br><code>[1, 14, 1, 64]</code> → <code>[1, 1, 14, 64]</code><br>→ <code>[1, 1, 896]</code></td></tr>
+<tr><th scope="row">注意力</th><td>Q <code>[1, 14, 1, 64]</code><br>K、V 各 <code>[1, 14, 3, 64]</code></td><td>—</td><td>Z <code>[1, 14, 1, 64]</code></td><td>按头批量打分 <code>S = QKᵀ / √64</code><br>沿 3 个可见位置归一化 <code>A = softmax(S)</code><br>S、A 各为 <code>[1, 14, 1, 3]</code><br>按头批量加权 <code>Z = AV</code></td></tr>
+<tr><th scope="row">多头合并</th><td>Z <code>[1, 14, 1, 64]</code></td><td>—</td><td>Z<sub>cat</sub> <code>[1, 1, 896]</code></td><td><code>transpose(1, 2)</code> → <code>[1, 1, 14, 64]</code><br><code>reshape</code> 展平最后两维，<code>14 × 64 = 896</code></td></tr>
+<tr><th scope="row"><code>o_proj</code></th><td>Z<sub>cat</sub> <code>[1, 1, 896]</code></td><td><code>[896, 896]</code></td><td><code>[1, 1, 896]</code></td><td>对拼接后的 896 维向量做线性投影</td></tr>
 </tbody></table>
 </div>
-<p class="basics-small">Q、K、V 投影先将最后一维拆为 <code>[heads, head_dim]</code>，再交换 Token 轴和头轴。对 Q/K 应用 RoPE 并追加当前 K/V 后，K、V 缓存各为 <code>[1, 2, 3, 64]</code>。注意力一行列出 eager 路径按 GQA 分组展开后的输入。<code>Z</code> 是换轴前各头的加权结果，合头后送入 <code>o_proj</code>。<a href="https://github.com/huggingface/transformers/blob/v4.57.3/src/transformers/models/qwen2/modeling_qwen2.py#L88-L166">Qwen2 注意力源码</a></p>
+<p class="basics-small">Q、K、V 投影后拆头并交换 Token 轴和头轴。对 Q/K 应用 RoPE 并追加当前 K/V 后，K、V 缓存各为 <code>[1, 2, 3, 64]</code>。表中注意力的输入采用 eager 路径按 GQA 分组展开后的形状。<code>QKᵀ</code> 和 <code>AV</code> 各执行一次批量矩阵乘法，以头轴为批量维同时处理 14 个头。</p>
+<p class="basics-small">加权结果 <code>Z</code> 已含全部 14 个头。数学上写作 <code>Concat(z₃¹, …, z₃¹⁴)</code>，表示按头编号排列同一位置的输出。Qwen2 的 eager 路径用 <code>transpose(1, 2).contiguous()</code> 交换 Token 轴和头轴，再用 <code>reshape</code> 把头维与头内维展平，得到 <code>o_proj</code> 的输入。<a href="https://github.com/huggingface/transformers/blob/v4.57.3/src/transformers/models/qwen2/modeling_qwen2.py#L88-L166">Qwen2 注意力源码</a></p>
 <div aria-label="Q 头 1 的分数、权重和 V 第 0 维" class="table-region trace-table qwen-values" role="region" tabindex="0">
 <table><caption>Q 头 1 · 三个位置的数值记录</caption><thead><tr><th scope="col">位置</th><th scope="col">缩放分数</th><th scope="col">权重</th><th scope="col">V 第 0 维</th></tr></thead><tbody>
 <tr><th scope="row"><code>The</code></th><td>173.89999</td><td>0.65872</td><td>0.00767</td></tr>
